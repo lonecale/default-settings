@@ -186,6 +186,9 @@ uci -q get network.globals.packet_steering > /dev/null || {
 sed -i '/coremark/d' /etc/crontabs/root
 crontab /etc/crontabs/root
 
+# disable qosmate
+[ -f /etc/config/qosmate ] && [ $(grep -c "option enabled '1'" /etc/config/qosmate) -eq '0' ] && service qosmate disable
+
 # init
 devices_setup
 
