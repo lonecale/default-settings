@@ -14,7 +14,6 @@ else
 fi
 
 kernel_version=$(uname -r | awk -F '[.-]' '{print $1"."$2}')
-[ "$kernel_version" = "6.12" ] && OTA_URL="https://api.cooluc.com/openwrt/ota_test.json"
 
 devices_setup()
 {
@@ -111,7 +110,7 @@ devices_setup()
 # theme
 if [ "$VERSION_TYPE" != "minimal" ] && [ -z "$(uci -q get luci.main.pollinterval)" ]; then
     uci set luci.main.mediaurlbase='/luci-static/argon'
-    uci set luci.main.pollinterval='2'
+    uci set luci.main.pollinterval='3'
     uci commit luci
 fi
 
@@ -178,7 +177,8 @@ fi
 # packet steering
 uci -q get network.globals.packet_steering > /dev/null || {
     uci set network.globals='globals'
-    uci set network.globals.packet_steering=1
+    [ "${VERSION%.*}" = 23 ] && uci set network.globals.packet_steering=1 || uci set network.globals.packet_steering=2
+    uci set network.globals.steering_flows='128'
     uci commit network
 }
 
