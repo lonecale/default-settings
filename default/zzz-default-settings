@@ -87,6 +87,9 @@ uci -q get network.globals.packet_steering > /dev/null || {
     uci commit network
 }
 
+# create opt
+[ ! -d "/opt" ] && mkdir /opt
+
 # disable coremark
 sed -i '/coremark/d' /etc/crontabs/root
 crontab /etc/crontabs/root
