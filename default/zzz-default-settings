@@ -26,9 +26,9 @@ devices_setup()
 
 # opkg mirror
 sed -i 's,downloads.openwrt.org,mirrors.aliyun.com/openwrt,g' /etc/opkg/distfeeds.conf
-echo "src/gz repo_base https://openwrt-lite.pages.dev/openwrt_base/$(. /etc/openwrt_release ; echo $DISTRIB_ARCH)" >> /etc/opkg/distfeeds.conf
-echo "src/gz repo_extd https://openwrt-lite.pages.dev/openwrt_extd/$(. /etc/openwrt_release ; echo $DISTRIB_ARCH)" >> /etc/opkg/distfeeds.conf
-echo "src/gz repo_lite https://openwrt-lite.pages.dev/openwrt_lite/$(. /etc/openwrt_release ; echo $DISTRIB_ARCH)" >> /etc/opkg/distfeeds.conf
+echo "src/gz repo_base https://openwrt-lite.pages.dev/openwrt_base/23.05/$(. /etc/openwrt_release ; echo $DISTRIB_ARCH)" >> /etc/opkg/distfeeds.conf
+echo "src/gz repo_extd https://openwrt-lite.pages.dev/openwrt_extd/23.05/$(. /etc/openwrt_release ; echo $DISTRIB_ARCH)" >> /etc/opkg/distfeeds.conf
+echo "src/gz repo_lite https://openwrt-lite.pages.dev/openwrt_lite/23.05/$(. /etc/openwrt_release ; echo $DISTRIB_ARCH)" >> /etc/opkg/distfeeds.conf
 [ ! -f /etc/opkg/keys/65e5c9185ca12c26 ] && echo -e 'untrusted comment: Local build key\nRWRl5ckYXKEsJontRs89DQXo5UCG3v8yRTtlWHOvyIJL2qalpj8j6kfR' > /etc/opkg/keys/65e5c9185ca12c26
 
 # banner
