@@ -94,6 +94,9 @@ uci -q get network.globals.packet_steering > /dev/null || {
 sed -i '/coremark/d' /etc/crontabs/root
 crontab /etc/crontabs/root
 
+# scheduled upgrade
+grep -q "opkg upgrade" /etc/crontabs/root || echo "#0 5 * * * opkg list-upgradable | grep -vE '(luci-base|luci-mod-)' | awk '{print \$1}' | xargs opkg upgrade" >> /etc/crontabs/root
+
 # init
 devices_setup
 
